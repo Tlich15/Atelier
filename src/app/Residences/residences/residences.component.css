@@ -1,0 +1,48 @@
+.status-green {
+    color: rgb(64, 238, 64);
+    font-weight: bold;
+  }
+  
+  .status-red {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .status-orange {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .status-default {
+    color: rgb(2, 199, 74);
+    font-weight: bold;
+  }
+  
+  .residence-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+
+
+  
+  button {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .liked {
+    color: red;
+    font-weight: bold;
+  }
