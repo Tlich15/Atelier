@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Residence } from 'src/core/Modeles/Residence';
-
+import { Residence } from 'src/core/Modeles/Residence'; // Make sure the path is correct
 
 @Component({
   selector: 'app-residence',
@@ -15,18 +14,48 @@ export class ResidenceComponent {
     { id: 4, name: "El Anber", address: "inconnu", image: "../../assets/images/R4.jpg", status: "En Construction" }
   ];
 
-  favorites: Residence[] = [];
+  favoriteResidences: Residence[] = []; // Use favoriteResidences for consistency
+  searchText: string = "";
+  filteredResidences: Residence[] = [...this.listResidences];
 
-  toggleFavorite(residence: Residence) {
-    const index = this.favorites.findIndex(fav => fav.id === residence.id);
-    if (index === -1) {
-      this.favorites.push(residence);
+  showLocation(residence: Residence): void {
+    if (residence.address.toLowerCase() === "inconnu") {
+      alert(`L'adresse de la résidence "${residence.name}" est inconnue.`);
     } else {
-      this.favorites.splice(index, 1);
+      alert(`L'adresse de la résidence "${residence.name}" est : ${residence.address}`);
+    }
+  }
+
+  toggleFavorite(residence: Residence): void {
+    const index = this.favoriteResidences.findIndex(fav => fav.id === residence.id);
+    if (index !== -1) {
+      this.favoriteResidences.splice(index, 1);
+    } else {
+      this.favoriteResidences.push(residence);
     }
   }
 
   isFavorite(residence: Residence): boolean {
-    return this.favorites.some(fav => fav.id === residence.id);
+    return this.favoriteResidences.some(fav => fav.id === residence.id);
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'Disponible':
+        return 'status-available';
+      case 'Vendu':
+        return 'status-sold';
+      case 'En Construction':
+        return 'status-construction';
+      default:
+        return '';
+    }
+  }
+
+  filterResidences(): void {
+    const lowerSearch = this.searchText.toLowerCase();
+    this.filteredResidences = this.listResidences.filter(residence =>
+      residence.address.toLowerCase().includes(lowerSearch)
+    );
   }
 }

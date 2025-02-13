@@ -21,6 +21,8 @@
             <span *ngSwitchDefault class="status-default">{{ r.status }}</span>
           </p>
 
+
+           
           <!-- Bouton Like -->
           <button (click)="toggleFavorite(r)" class="btn btn-light" [ngClass]="{'liked': isFavorite(r)}">
             ❤️ {{ isFavorite(r) ? 'Unlike' : 'Like' }}
@@ -32,11 +34,22 @@
 </div>
 
 <!-- Section Favoris -->
-<h2 style="text-align: center; margin-top: 40px;">Favoris</h2>
+<h2 style="text-align: center; margin-top: 40px;">Favoris ❤️</h2>
 <div class="container">
-  <ul class="list-group">
-    <li *ngFor="let fav of favorites" class="list-group-item text-center">
-      {{ fav.name }}
-    </li>
-  </ul>
+  <div class="row">
+    <div *ngFor="let residence of favoriteResidences" class="col-md-4" style="margin-bottom: 20px">  <div class="card shadow-sm" style="width: 18rem; border-radius: 10px;">
+        <img [src]="residence.image" alt="{{ residence.name }}" class="card-img-top" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ residence.name }}</h5>
+          <p class="text-muted">{{ residence.address }}</p>
+          <p>{{ residence.status }}</p>
+          <button (click)="toggleFavorite(residence)" class="btn btn-danger">
+            <i class="fas fa-trash"></i> Retirer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
